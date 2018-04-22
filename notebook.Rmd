@@ -114,7 +114,8 @@ logistic.display(kekka) # オッズ比を確認
 
 
 ### 参考文献
-↓はロジスティック回帰オッズ比と信頼区間の出し方を解説されています。
+↓はロジスティック回帰オッズ比と信頼区間の出し方を解説されています。  
 https://researchmap.jp/jomk5xr2p-1781589/
-↓はこのHTML文書にある表の作成で参考にしました。
+
+↓はこのHTML文書にある表の作成で参考にしました。  
 http://yoshi-nishikawa.hatenablog.com/entry/2018/03/21/234347
