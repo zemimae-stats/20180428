@@ -15,18 +15,27 @@ knitr::opts_chunk$set(
   warning=FALSE, # 警告表示の有無
   message=FALSE  # メッセージ表示の有無
 )
-setwd("/Users/hikaru1122/Googledrive/2018_01_0428zemimae_toukei")
+setwd("/Users/hikaru1122/GoogleDrive/02-research/01-document/00JAIST/toukeibenkyou2018/2018_01_0428zemimae_toukei/")
+options(scipen=100) # できるだけ指数表示を避けるため
 library(tidyverse)
+library(broom)
 library(knitr)
 library(DT)
 library(xtable)
 library(readxl)
-titanic_data <- read_excel("./titanic.xlsx")
+titanic_data <- read_excel("titanic.xlsx")
 ```
 
 ## 1．データのインポート
 
 この操作は右上の「import Dataset」アイコンから可能。
+
+### おまじない
+
+```{r, eval=FALSE}
+options(scipen=100) # 指数表示を避けるため
+```
+
 
 ## 2．Importしたデータをコピーしてオリジナルを保存
 この作業は必須ではないですが，私の場合，データをこねくり回しても元に戻せるようにバックアップを取ることが多いです。
@@ -80,7 +89,7 @@ summary(kekka)
 ```
 
 ```{r, echo=FALSE}
-xtable(kekka)
+tidy(kekka) %>% kable()
 ```
 
 分析結果が出たところで，オッズ比を確認してみましょう。
@@ -103,8 +112,25 @@ exp(confint(kekka)) #オッズ比の95%信頼区間
 exp(confint(kekka)) %>% kable() #オッズ比の95%信頼区間
 ```
 
+## 7．もちろん交互作用も検討できる。
 
-## 7．別の方法でオッズ比を確認 
+```{r}
+kekka_kougo = glm(survived ~ gender + age + passengerClass + 
+                    gender:age + gender:passengerClass + age:passengerClass,
+                    data=d, family=binomial)
+```
+
+```{r echo=FALSE}
+tidy(kekka_kougo) %>% kable()
+```
+
+```{r, eval=FALSE}
+exp(coef(kekka_kougo)) # オッズ比
+exp(confint(kekka_kougo)) # 95%信頼区間
+```
+
+
+## 8．別の方法でオッズ比を確認 
 
 ```{r}
 # install.packages("epiDisplay") # インストールしてなければインストールする
@@ -114,8 +140,10 @@ logistic.display(kekka) # オッズ比を確認
 
 
 ### 参考文献
-↓はロジスティック回帰オッズ比と信頼区間の出し方を解説されています。  
+↓はロジスティック回帰オッズ比と信頼区間の出し方を解説されています。
+
 https://researchmap.jp/jomk5xr2p-1781589/
 
-↓はこのHTML文書にある表の作成で参考にしました。  
+↓はこのHTML文書にある表の作成で参考にしました。
+
 http://yoshi-nishikawa.hatenablog.com/entry/2018/03/21/234347
