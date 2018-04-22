@@ -5,6 +5,8 @@ titanic.R は実習の分析の手順と結果を示したファイル。
 
 titanic.xlsx は実習用データ。effects パッケージから取り出したもの。RStudioを使ってインポートしてください。
 
+notebook.htmlは分析の流れを説明しているファイルです。
+
 notebook.RmdはRMarkdownという言葉を聞いた人がある人向けです。README.mdは関係ありません。
 
 各ファイルは右クリックして「リンク先を保存」でダウンロードできます。
