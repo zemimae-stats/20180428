@@ -3,9 +3,11 @@
 
 titanic.R は実習の分析の手順と結果を示したファイル。
 
-titanic.xlsx は実習用データ。effects パッケージから取り出したもの。
+titanic.xlsx は実習用データ。effects パッケージから取り出したもの。RStudioを使ってインポートしてください。
 
-拡張子が .Rmd のファイルはRMarkdownという言葉を聞いた人がある人向けです。
+notebook.RmdはRMarkdownという言葉を聞いた人がある人向けです。README.mdは関係ありません。
+
+各ファイルは右クリックして「リンク先を保存」でダウンロードできます。
 
 ## スライドは↓のグーグルスライド。
 https://docs.google.com/presentation/d/11ANDI8u5rhVwNiMKyv77pt2MJZ62pydiYPCGFJIPiXM/edit?usp=sharing
