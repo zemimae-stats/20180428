@@ -1,0 +1,120 @@
+---
+title: "ゼミ前統計分析勉強会2018 第1回"
+author: "Hikaru GOTO"
+date: "2018年4月28日"
+output:
+  html_document:
+    df_print: paged
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  #echo=TRUE,     # chunk表示の有無
+  #eval=FALSE,    # chunk実行の有無
+  warning=FALSE, # 警告表示の有無
+  message=FALSE  # メッセージ表示の有無
+)
+setwd("/Users/hikaru1122/Googledrive/2018_01_0428zemimae_toukei")
+library(tidyverse)
+library(knitr)
+library(DT)
+library(xtable)
+library(readxl)
+titanic_data <- read_excel("./titanic.xlsx")
+```
+
+## 1．データのインポート
+
+この操作は右上の「import Dataset」アイコンから可能。
+
+## 2．Importしたデータをコピーしてオリジナルを保存
+この作業は必須ではないですが，私の場合，データをこねくり回しても元に戻せるようにバックアップを取ることが多いです。
+
+```{r}
+d = titanic_data
+```
+
+```{r, eval=FALSE}
+head(d)
+```
+
+
+```{r, echo=FALSE}
+DT::datatable(d)
+```
+
+## 3．データの構造を見る
+まず確認。本当は可視化できるといいですが，ちょっと難しいので，またの機会に。
+
+```{r}
+str(d)
+```
+
+## 4．必要な説明変数を因子化などの変換
+文字列のデータはそのまま分析できません。そのため数値として扱えるように，因子化します。`age`は数値型に`as.numeric()`を使って変換します。因子化は，`as.factor`もしくは`factor()`関数を使います。
+
+```{r}
+d$gender = as.factor(d$gender)
+d$age = as.numeric(d$age)
+d$passengerClass = as.factor(d$passengerClass)
+```
+
+変換できたか，念のためチェックします。
+
+```{r}
+str(d) # ちゃんと変換できたかチェック
+```
+
+
+## 5．ロジスティック回帰
+
+ロジスティック回帰は`glm()`を使います。分布族に二項分布`family=binomial`を指定するのがポイントです。分析結果を`kekka`というオブジェクトに保存します。名前は好きにつけていいです。
+
+```{r}
+kekka = glm(survived ~ gender + age + passengerClass, data=d, family=binomial)
+```
+
+```{r, eval=FALSE}
+summary(kekka)
+```
+
+```{r, echo=FALSE}
+xtable(kekka)
+```
+
+分析結果が出たところで，オッズ比を確認してみましょう。
+
+## 6．オッズ比を確認
+
+```{r, eval=FALSE}
+exp(coef(kekka)) #オッズ比
+```
+
+```{r, echo=FALSE}
+exp(coef(kekka)) %>% kable() #オッズ比
+```
+
+```{r, eval=FALSE}
+exp(confint(kekka)) #オッズ比の95%信頼区間
+```
+
+```{r, echo=FALSE}
+exp(confint(kekka)) %>% kable() #オッズ比の95%信頼区間
+```
+
+
+## 7．別の方法でオッズ比を確認 
+
+```{r}
+# install.packages("epiDisplay") # インストールしてなければインストールする
+library(epiDisplay) # 使えるようにロードする
+logistic.display(kekka) # オッズ比を確認
+```
+
+
+### 参考文献
+↓はロジスティック回帰オッズ比と信頼区間の出し方を解説されています。
+https://researchmap.jp/jomk5xr2p-1781589/
+↓はこのHTML文書にある表の作成で参考にしました。
+http://yoshi-nishikawa.hatenablog.com/entry/2018/03/21/234347
