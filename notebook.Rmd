@@ -88,6 +88,14 @@ str(d) # ちゃんと変換できたかチェック
 あまりいい図ではないですが，少し可視化しておきます。
 
 ```{r}
+d %>% ggplot(aes(x=gender, y=survived)) + geom_jitter()
+```
+
+```{r}
+d %>% ggplot(aes(x=age, y=survived)) + geom_jitter()
+```
+
+```{r}
 d %>% ggplot(aes(x=passengerClass, y=survived)) + geom_jitter()
 ```
 
