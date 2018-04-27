@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
   warning=FALSE, # 警告表示の有無
   message=FALSE  # メッセージ表示の有無
 )
-setwd("/Users/hikaru1122/GoogleDrive/02-research/01-document/00JAIST/toukeibenkyou2018/2018_01_0428zemimae_toukei/")
+setwd("/Users/hikaru1122/GoogleDrive/02-research/01-document/00JAIST/toukeibenkyou2018/zemimaestats201804")
 options(scipen=100) # できるだけ指数表示を避けるため
 library(tidyverse)
 library(broom)
