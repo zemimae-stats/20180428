@@ -26,6 +26,14 @@ library(readxl)
 titanic_data <- read_excel("titanic.xlsx")
 ```
 
+## 0．ライブラリの準備
+
+```{r, eval=FALSE}
+library(tidyverse)
+# インストールしていなければ，install.packages("tidyverse")
+```
+
+
 ## 1．データのインポート
 
 この操作は右上の「import Dataset」アイコンから可能。
@@ -54,7 +62,6 @@ DT::datatable(d)
 ```
 
 ## 3．データの構造を見る
-まず確認。本当は可視化できるといいですが，ちょっと難しいので，またの機会に。
 
 ```{r}
 str(d)
@@ -77,6 +84,13 @@ str(d) # ちゃんと変換できたかチェック
 
 
 ## 5．ロジスティック回帰
+
+あまりいい図ではないですが，少し可視化しておきます。
+
+```{r}
+d %>% ggplot(aes(x=passengerClass, y=survived)) + geom_jitter()
+```
+
 
 ロジスティック回帰は`glm()`を使います。分布族に二項分布`family=binomial`を指定するのがポイントです。分析結果を`kekka`というオブジェクトに保存します。名前は好きにつけていいです。
 
