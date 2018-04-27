@@ -7,7 +7,7 @@ titanic.xlsx は実習用データ。effects パッケージから取り出し�
 
 notebook.htmlは分析の流れを説明しているファイルです。
 
-notebook.RmdはRMarkdownという言葉を聞いた人がある人向けです。README.mdは関係ありません。
+notebook.RmdはRMarkdownという言葉を聞いた人がある人向けです。README.mdや.gitignoreは関係ありません。
 
 各ファイルは右クリックして「リンク先を保存」でダウンロードできます。
 
