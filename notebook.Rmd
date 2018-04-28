@@ -71,6 +71,7 @@ str(d)
 文字列のデータはそのまま分析できません。そのため数値として扱えるように，因子化します。`age`は数値型に`as.numeric()`を使って変換します。因子化は，`as.factor`もしくは`factor()`関数を使います。
 
 ```{r}
+d$survived = as.factor(d$survived)
 d$gender = as.factor(d$gender)
 d$age = as.numeric(d$age)
 d$passengerClass = as.factor(d$passengerClass)
@@ -82,17 +83,35 @@ d$passengerClass = as.factor(d$passengerClass)
 str(d) # ちゃんと変換できたかチェック
 ```
 
+要約統計量も見てみましょう。
+
+```{r}
+summary(d)
+```
+
 
 ## 5．ロジスティック回帰
 
-あまりいい図ではないですが，少し可視化しておきます。
+少し可視化しておきます。
 
 ```{r}
-d %>% ggplot(aes(x=gender, y=survived)) + geom_jitter()
+d %>% ggplot(aes(x=passengerClass)) + geom_bar(aes(fill=survived), position="fill") +
+  coord_flip()
 ```
 
 ```{r}
-d %>% ggplot(aes(x=age, y=survived)) + geom_jitter()
+d %>% ggplot(aes(x=gender)) + geom_bar(aes(fill=(survived)), position="fill") +
+  coord_flip()
+```
+
+```{r}
+d %>% ggplot(aes(x=age, y=survived)) + geom_jitter(aes(color=survived)) 
+```
+
+ちょっとイマイチの図ですが･･･。
+
+```{r}
+d %>% ggplot(aes(x=gender, y=survived)) + geom_jitter()
 ```
 
 ```{r}
