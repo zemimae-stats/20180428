@@ -52,12 +52,16 @@ options(scipen=100) # 指数表示を避けるため
 d = titanic_data
 ```
 
-```{r, eval=FALSE}
+```{r}
 head(d)
 ```
 
+```{r}
+summary(d)
+```
 
-```{r, echo=FALSE}
+
+```{r, eval=FALSE, echo=FALSE}
 DT::datatable(d)
 ```
 
@@ -125,11 +129,11 @@ d %>% ggplot(aes(x=passengerClass, y=survived)) + geom_jitter()
 kekka = glm(survived ~ gender + age + passengerClass, data=d, family=binomial)
 ```
 
-```{r, eval=FALSE}
+```{r}
 summary(kekka)
 ```
 
-```{r, echo=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 tidy(kekka) %>% kable()
 ```
 
@@ -137,19 +141,19 @@ tidy(kekka) %>% kable()
 
 ## 6．オッズ比を確認
 
-```{r, eval=FALSE}
+```{r}
 exp(coef(kekka)) #オッズ比
 ```
 
-```{r, echo=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 exp(coef(kekka)) %>% kable() #オッズ比
 ```
 
-```{r, eval=FALSE}
+```{r}
 exp(confint(kekka)) #オッズ比の95%信頼区間
 ```
 
-```{r, echo=FALSE}
+```{r, eval=FALSE, echo=FALSE}
 exp(confint(kekka)) %>% kable() #オッズ比の95%信頼区間
 ```
 
@@ -161,11 +165,17 @@ kekka_kougo = glm(survived ~ gender + age + passengerClass +
                     data=d, family=binomial)
 ```
 
-```{r echo=FALSE}
+```{r}
+summary(kekka_kougo)
+```
+
+
+```{r, eval=FALSE, echo=FALSE}
 tidy(kekka_kougo) %>% kable()
 ```
 
 ```{r, eval=FALSE}
+#各自確かめてください。
 exp(coef(kekka_kougo)) # オッズ比
 exp(confint(kekka_kougo)) # 95%信頼区間
 ```
