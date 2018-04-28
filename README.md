@@ -13,3 +13,6 @@ notebook.RmdはRMarkdownという言葉を聞いた人がある人向けです�
 
 ## スライドは↓のグーグルスライド。
 https://docs.google.com/presentation/d/11ANDI8u5rhVwNiMKyv77pt2MJZ62pydiYPCGFJIPiXM/edit?usp=sharing
+
+## titanic の一連の分析の流れはこちら
+https://zemimae-stats.github.io/20180428/index.html
